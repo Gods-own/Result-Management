@@ -14,7 +14,14 @@ class CreateClassRoomsTable extends Migration
     public function up()
     {
         Schema::create('class_rooms', function (Blueprint $table) {
+<<<<<<< HEAD
             $table->id();
+=======
+            $table->id()->unsigned();
+            $table->string('class_room', 5);
+            $table->unsignedBiginteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onDelete('cascade');
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
             $table->timestamps();
         });
     }

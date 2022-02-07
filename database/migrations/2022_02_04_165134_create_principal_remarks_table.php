@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTests1Table extends Migration
+class CreatePrincipalRemarksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,15 @@ class CreateTests1Table extends Migration
      */
     public function up()
     {
-        Schema::create('tests1', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
+        Schema::create('principal_remarks', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->unsignedBiginteger('student_id');
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBiginteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->unsignedBiginteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBiginteger('term_id');
             $table->foreign('term_id')->references('id')->on('terms')->onDelete('cascade');
-            $table->integer('test1');
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->string('remark');
             $table->timestamps();
         });
     }
@@ -37,6 +33,7 @@ class CreateTests1Table extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tests1');
+        Schema::dropIfExists('principal_remarks');
     }
+    
 }

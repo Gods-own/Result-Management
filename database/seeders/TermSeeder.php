@@ -14,6 +14,11 @@ class TermSeeder extends Seeder
      */
     public function run()
     {
+<<<<<<< HEAD
+=======
+        DB::table('terms')->truncate();
+
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
         DB::table('terms')->insert([
             ['term' => 'First'],
             ['term' => 'Second'],

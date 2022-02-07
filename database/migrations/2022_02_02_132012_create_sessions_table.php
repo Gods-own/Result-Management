@@ -14,7 +14,13 @@ class CreateSessionsTable extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
+<<<<<<< HEAD
             $table->id();
+=======
+            $table->id()->unsigned();
+            $table->date('session_start');
+            $table->date('session_end');
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
             $table->timestamps();
         });
     }

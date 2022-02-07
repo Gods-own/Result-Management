@@ -18,7 +18,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SubjectSeeder::class,
             TermSeeder::class,
+<<<<<<< HEAD
             Character::class,
+=======
+            CharacterSeeder::class,
+            SubjectTypeSeeder::class,
+            StudentTypeSeeder::class,
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
         ]);
     }
 }

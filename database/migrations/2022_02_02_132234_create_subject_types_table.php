@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCharacterDevsTable extends Migration
+class CreateSubjectTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateCharacterDevsTable extends Migration
      */
     public function up()
     {
-        Schema::create('character_devs', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
+        Schema::create('subject_types', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('character', 26);
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->string('subject_type', 40);
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateCharacterDevsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('character_devs');
+        Schema::dropIfExists('subject_types');
     }
 }

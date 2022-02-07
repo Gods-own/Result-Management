@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+<<<<<<< HEAD
+=======
+        'gender',
+        'phoneNumber',
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
     ];
 
     /**
@@ -42,6 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     public function teacher()
     {
         return $this->hasMany(Teacher::class);
@@ -51,5 +57,78 @@ class User extends Authenticatable
     {
         return $this->hasMany(Student::class);
     }
+=======
+    public function principals()
+    {
+        return $this->hasOne(Principal::class, 'admin_id');
+    }
+
+    public function class_room()
+    {
+        return $this->hasOne(classroom::class);
+    }
+
+    public function teachers()
+    {
+        return $this->hasOne(Teacher::class, 'teacher_id');
+    }
+
+    public function subjects() {
+        return $this->belongstoMany(Subject::class, 'subject_teacher', 'subject_id', 'teacher_id');
+    }
+
+
+    public function students()
+    {
+        return $this->hasOne(Student::class, 'student_id');
+    }
+
+    public function tests1()
+    {
+        return $this->hasMany(Test1::class, 'student_id');
+    }
+
+    public function tests2()
+    {
+        return $this->hasMany(Test2::class, 'student_id');
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'student_id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany(Result::class, 'student_id');
+    }
+
+    public function remarks1()
+    {
+        return $this->hasMany(Remark::class, 'student_id');
+    }
+
+    public function remarks2()
+    {
+        return $this->hasMany(Remark::class);
+    }
+
+    public function character_dev_gradings()
+    {
+        return $this->hasMany(CharacterDevGrading::class, 'student_id');
+    }
+
+    public function principal_remarks1()
+    {
+        return $this->hasMany(PrincipalRemark::class, 'student_id');
+    }
+
+    public function principal_remarks2()
+    {
+        return $this->hasMany(PrincipalRemark::class);
+    }
+
+
+>>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
 }
 
