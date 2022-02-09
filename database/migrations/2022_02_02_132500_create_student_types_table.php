@@ -15,7 +15,7 @@ class CreateStudentTypesTable extends Migration
     {
         Schema::create('student_types', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('student_type', 40);
+            $table->string('student_type', 40)->unique();
             $table->timestamps();
         });
     }

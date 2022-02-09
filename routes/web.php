@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\AddTeacherController;
+use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\Dashboards\DashboardController;
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,20 +20,25 @@ use App\Http\Controllers\Dashboards\DashboardController;
 |
 */
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
-<<<<<<< HEAD
-
-Route::get('/', function () {
-    return view('home');
-});
-=======
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/add_teacher', [AddTeacherController::class, 'index'])->name('add_teacher');
+Route::post('/add_teacher', [AddTeacherController::class, 'store']);
+
+Route::get('/add_student', [AddStudentController::class, 'index'])->name('add_student');
+Route::post('/add_student', [AddStudentController::class, 'store']);
+
+Route::get('/add_class', [AddClassController::class, 'index'])->name('add_class');
+Route::post('/add_class', [AddClassController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::get('/logout', [LogoutController::class, 'store'])->name('logout');
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
 
 // Route::get('/dashboard/staff', [TeacherDashboardController::class, 'index'])->name('teacherDashboard');
 
@@ -42,4 +47,3 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/', function () {
     return view('home');
 })->name('home');
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7

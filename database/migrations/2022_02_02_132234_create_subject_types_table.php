@@ -15,7 +15,7 @@ class CreateSubjectTypesTable extends Migration
     {
         Schema::create('subject_types', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('subject_type', 40);
+            $table->string('subject_type', 40)->unique();
             $table->timestamps();
         });
     }

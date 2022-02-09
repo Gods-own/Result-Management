@@ -14,12 +14,8 @@ class CreateCharacterDevsTable extends Migration
     public function up()
     {
         Schema::create('character_devs', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
             $table->id()->unsigned();
-            $table->string('character', 26);
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->string('character', 40);
             $table->timestamps();
         });
     }

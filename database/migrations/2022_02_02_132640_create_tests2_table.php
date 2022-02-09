@@ -14,18 +14,14 @@ class CreateTests2Table extends Migration
     public function up()
     {
         Schema::create('tests2', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
             $table->id()->unsigned();
             $table->unsignedBiginteger('student_id');
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users');
             $table->unsignedBiginteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->unsignedBiginteger('term_id');
-            $table->foreign('term_id')->references('id')->on('terms')->onDelete('cascade');
+            $table->foreign('term_id')->references('id')->on('terms');
             $table->integer('test2');
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
             $table->timestamps();
         });
     }

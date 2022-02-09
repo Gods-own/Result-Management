@@ -14,12 +14,9 @@ class SubjectSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
-=======
 
         DB::table('subjects')->truncate();
 
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
         DB::table('subjects')->insert([
             ['subject' => 'Mathematics'],
             ['subject' => 'English Language'],

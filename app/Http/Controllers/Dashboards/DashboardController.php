@@ -16,13 +16,13 @@ class DashboardController extends Controller
     public function index() 
     {
         if (Auth::user()->user_type == 'principal') {
-            return view('adminDashboard');
+            return view('dashboards.adminDashboard');
         }
         elseif (Auth::user()->user_type == 'teacher') {
-            return view('teacherDashboard');
+            return view('dashboards.teacherDashboard');
         }
         else {
-            return view('studentDashboard');
+            return view('dashboards.studentDashboard');
         }
     }
 }

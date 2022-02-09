@@ -14,14 +14,9 @@ class CreatePrincipalsTable extends Migration
     public function up()
     {
         Schema::create('principals', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-            $table->
-=======
             $table->id()->unsigned();
             $table->unsignedBiginteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
             $table->timestamps();
         });
     }

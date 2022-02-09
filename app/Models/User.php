@@ -21,11 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-<<<<<<< HEAD
-=======
         'gender',
         'phoneNumber',
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
     ];
 
     /**
@@ -47,28 +44,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
-    public function teacher()
-    {
-        return $this->hasMany(Teacher::class);
-    }
-
-    public function student()
-    {
-        return $this->hasMany(Student::class);
-    }
-=======
-    public function principals()
+    public function principal()
     {
         return $this->hasOne(Principal::class, 'admin_id');
     }
 
     public function class_room()
     {
-        return $this->hasOne(classroom::class);
+        return $this->hasOne(Classroom::class);
     }
 
-    public function teachers()
+    public function teacher()
     {
         return $this->hasOne(Teacher::class, 'teacher_id');
     }
@@ -129,6 +115,5 @@ class User extends Authenticatable
     }
 
 
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
 }
 

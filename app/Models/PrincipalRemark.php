@@ -9,6 +9,8 @@ class PrincipalRemark extends Model
 {
     use HasFactory;
 
+    protected $table = 'principal_remarks';
+
     protected $fillable = [
         'remark',
     ];

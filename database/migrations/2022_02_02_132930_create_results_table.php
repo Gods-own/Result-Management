@@ -14,25 +14,21 @@ class CreateResultsTable extends Migration
     public function up()
     {
         Schema::create('results', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
             $table->id()->unsigned();
             $table->unsignedBiginteger('student_id');
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users');
             $table->unsignedBiginteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects');
             $table->unsignedBiginteger('test1_id');
-            $table->foreign('test1_id')->references('id')->on('tests1')->onDelete('cascade');
+            $table->foreign('test1_id')->references('id')->on('tests1');
             $table->unsignedBiginteger('test2_id');
-            $table->foreign('test2_id')->references('id')->on('tests2')->onDelete('cascade');
+            $table->foreign('test2_id')->references('id')->on('tests2');
             $table->unsignedBiginteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
+            $table->foreign('exam_id')->references('id')->on('exams');
             $table->integer('total');
             $table->string('grade', 2);
             $table->unsignedBiginteger('term_id');
-            $table->foreign('term_id')->references('id')->on('terms')->onDelete('cascade');
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->foreign('term_id')->references('id')->on('terms');
             $table->timestamps();
         });
     }

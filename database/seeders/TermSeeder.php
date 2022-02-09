@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+require 'vendor/autoload.php';
+
+use Carbon\Carbon;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,15 +18,14 @@ class TermSeeder extends Seeder
      */
     public function run()
     {
-<<<<<<< HEAD
-=======
-        DB::table('terms')->truncate();
 
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
         DB::table('terms')->insert([
-            ['term' => 'First'],
-            ['term' => 'Second'],
-            ['term' => 'Third'],
+            ['term' => 'First', 'created_at' => Carbon::now()->format('Y-m-d H:i:s'), 
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['term' => 'Second', 'created_at' => Carbon::now()->format('Y-m-d H:i:s'), 
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')],
+            ['term' => 'Third', 'created_at' => Carbon::now()->format('Y-m-d H:i:s'), 
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')],
         ]);
     }
 }

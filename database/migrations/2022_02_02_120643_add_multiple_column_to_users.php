@@ -15,13 +15,8 @@ class AddMultipleColumnToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->enum('user_type', ['principal', 'staff', 'student']);
-<<<<<<< HEAD
-            $table->string('gender');
-            $table->string('phoneNumber');
-=======
             $table->string('gender', 8);
-            $table->string('phoneNumber', 11);
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->string('phoneNumber', 11)->unique();
         });
     }
 

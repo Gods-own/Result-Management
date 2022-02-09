@@ -14,12 +14,8 @@ class CreateTermsTable extends Migration
     public function up()
     {
         Schema::create('terms', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
             $table->id()->unsigned();
-            $table->string('term', 7);
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
+            $table->string('term', 10)->unique();
             $table->timestamps();
         });
     }

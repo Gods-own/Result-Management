@@ -16,11 +16,11 @@ class CreatePrincipalRemarksTable extends Migration
         Schema::create('principal_remarks', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->unsignedBiginteger('student_id');
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users');
             $table->unsignedBiginteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBiginteger('term_id');
-            $table->foreign('term_id')->references('id')->on('terms')->onDelete('cascade');
+            $table->foreign('term_id')->references('id')->on('terms');
             $table->string('remark');
             $table->timestamps();
         });

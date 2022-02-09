@@ -13,8 +13,8 @@ class Teacher extends Model
         'title',
     ];
 
-    public function users() 
+    public function user()
     {
-        return $this->belongTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

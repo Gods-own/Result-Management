@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<p>admin</p>
+<a href="{{ route('add_teacher') }}">Add Teacher</a>
 @endsection

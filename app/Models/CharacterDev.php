@@ -9,6 +9,8 @@ class CharacterDev extends Model
 {
     use HasFactory;
 
+    protected $table = 'character_devs';
+
     protected $fillable = [
         'character',
     ];

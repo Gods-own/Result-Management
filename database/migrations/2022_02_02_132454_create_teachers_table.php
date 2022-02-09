@@ -14,14 +14,10 @@ class CreateTeachersTable extends Migration
     public function up()
     {
         Schema::create('teachers', function (Blueprint $table) {
-<<<<<<< HEAD
-            $table->id();
-=======
             $table->id()->unsigned();
             $table->unsignedBiginteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('title', ['Mr.', 'Mrs.', 'Ms.']);
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
             $table->timestamps();
         });
     }

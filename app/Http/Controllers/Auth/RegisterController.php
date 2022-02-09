@@ -2,36 +2,41 @@
 
 namespace App\Http\Controllers\Auth;
 
-<<<<<<< HEAD
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-class RegisterController extends Controller
-{
-    public function index () {
-        return view('auth.register');
-    }
-=======
 use App\Models\User;
+use App\Models\Principal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
 {
 
-    public function __construct() 
+    public function __construct(User $user, Principal $principal)
     {
+        $this->user = $user;
+        $this->principal = $principal;
         $this->middleware('guest', ['except' => 'logout']);
     }
-    
+
     public function index () {
         return view('auth.register');
     }
 
     public function store(Request $request) {
+
+        $check_names = User::all();
+
+        $names = array();
+
+        foreach($check_names as $name) 
+        {
+
+            array_push($names, $name->name);
+        }
+
         $validatedData = $request->validate([
-            'name' => ['required', 'alpha', 'max:35'],
+            'name' => ['required', 'max:35', Rule::notIn($names)],
             'email' => ['required', 'email', 'max:255'],
             'user_type' => ['required', 'starts_with:p', 'ends_with:l'],
             'gender' => ['required'],
@@ -51,9 +56,12 @@ class RegisterController extends Controller
         $user->user_type = $request->user_type;
         $user->save();
 
+        $principal = new Principal();
+
+        $user->principal()->save($principal);
+
         auth()->attempt($request->only('email', 'password'));
 
         return redirect()->route('dashboard');
     }
->>>>>>> 13db7e93951a379f299d231100d5e65598c1fca7
 }

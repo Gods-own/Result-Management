@@ -3,8 +3,23 @@
 @section('content')
    <div class="flex justify-center">
         <div class="w-6/12 bg-white p-6 rounded-lg">
-            <form action="{{ route('register') }}" method="post">
+            @if (session('status'))
+                <p>{{ session('status') }}</p>
+            @endif
+            <form action="{{ route('add_teacher') }}" method="post">
                 @csrf
+                <div class="mb-4">
+                    <label for="title">Title</label>
+                    <select id="title" name="title">
+                        @foreach($titles as $title)
+                            <option>{{ $title }}</option>
+                        @endforeach
+                    </select>
+                    @error('title')
+                    <div>
+                        {{ $message }}
+                </div>
+                    @enderror
                 <div class="mb-4">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}">
@@ -23,7 +38,7 @@
                     </div>
                     @enderror
                 </div>
-                <input type="hidden" name="user_type" id="user_type" value="principal">
+                <input type="hidden" name="user_type" id="user_type" value="staff">
                 <div class="mb-4">
                     <label for="male">Male</label>
                     <input type="radio" name="gender" id="male" value="Male">
