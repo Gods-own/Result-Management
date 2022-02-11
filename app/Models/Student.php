@@ -13,7 +13,7 @@ class Student extends Model
         'profile_pic',
     ];
 
-    public function users() 
+    public function user()
     {
         return $this->belongsTo(User::class, 'student_id');
     }
@@ -22,7 +22,7 @@ class Student extends Model
         return $this->belongsTo(StudentType::class);
     }
 
-    public function sessions() 
+    public function sessions()
     {
         return $this->belongsTo(Session::class);
     }

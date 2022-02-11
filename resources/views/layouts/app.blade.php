@@ -11,10 +11,10 @@
 <body>
     <nav>
         <div>
-            <ul>
+            <ul class="inline bg-blue-500">
                 @guest
-                <li><a href="{{ route('login') }}">Login</a></li>
-                <li><a href="{{ route('register') }}">Register</a></li>
+                <li class="inline bg-blue-500"><a href="{{ route('login') }}">Login</a></li>
+                <li class="inline bg-blue-500"><a href="{{ route('register') }}">Register</a></li>
                 @endguest
                 @auth
                 <li>

@@ -52,7 +52,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phonNumber') }}">
+                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
                     @error('phoneNumber')
                     <div>
                         {{ $message }}

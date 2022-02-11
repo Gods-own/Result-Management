@@ -15,7 +15,6 @@ class ChangeUserIdToUniqueInClassRoomsTable extends Migration
     {
         Schema::table('class_rooms', function (Blueprint $table) {
             $table->unsignedBiginteger('user_id')->unique()->change();
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

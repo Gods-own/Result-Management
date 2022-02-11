@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\AddTeacherController;
+use App\Http\Controllers\Auth\AddStudentController;
+use App\Http\Controllers\AddSubjectController;
 use App\Http\Controllers\AddClassController;
 use App\Http\Controllers\Dashboards\DashboardController;
 
@@ -30,6 +32,9 @@ Route::post('/add_student', [AddStudentController::class, 'store']);
 
 Route::get('/add_class', [AddClassController::class, 'index'])->name('add_class');
 Route::post('/add_class', [AddClassController::class, 'store']);
+
+Route::get('/add_subject', [AddSubjectController::class, 'index'])->name('add_subject');
+Route::post('/add_subject', [AddSubjectController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);

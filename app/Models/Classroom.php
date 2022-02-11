@@ -12,6 +12,7 @@ class Classroom extends Model
     protected $table = 'class_rooms';
 
     protected $fillable = [
+        'user_id',
         'class_room',
     ];
 

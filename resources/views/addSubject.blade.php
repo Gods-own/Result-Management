@@ -6,32 +6,32 @@
             @if (session('status'))
                 {{ session('status') }}
             @endif
-            <form action="{{ route('add_class') }}" method="post">
+            <form action="{{ route('add_subject') }}" method="post">
                 @csrf
                 <div class="mb-4">
-                    <label for="classroom">Class</label>
-                    <input type="text" name="classroom" id="classroom" value="{{ old('classroom') }}">
-                    @error('classroom')
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" value="{{ old('subject') }}">
+                    @error('subject')
                     <div>
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="teacher">Teacher</label>
-                    <select id="teacher" name="teacher">
-                        @foreach($teachers as $teacher)
-                            <option value="{{ $teacher->user->id }}">{{ $teacher->title }} {{ $teacher->user->name }}</option>
+                    <label for="subjecttype">Teacher</label>
+                    <select id="subjecttype" name="subjecttype">
+                        @foreach($subjecttypes as $subjecttype)
+                            <option value="{{ $subjecttype->id }}">{{ $subjecttype->subject_type }}</option>
                         @endforeach
                     </select>
-                    @error('teacher')
+                    @error('subjecttype')
                     <div>
                         {{ $message }}
                 </div>
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <button type="submit">Add Class</button>
+                    <button type="submit">Add Subject</button>
                 </div>
             </form>
         </div>

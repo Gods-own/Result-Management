@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware(['auth']);
     }
 
-    public function index() 
+    public function index()
     {
         if (Auth::user()->user_type == 'principal') {
             return view('dashboards.adminDashboard');
         }
-        elseif (Auth::user()->user_type == 'teacher') {
+        elseif (Auth::user()->user_type == 'staff') {
             return view('dashboards.teacherDashboard');
         }
         else {

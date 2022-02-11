@@ -438,8 +438,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-4 {
   margin-bottom: 1rem;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
+}
+.hidden {
+  display: none;
 }
 .w-6\/12 {
   width: 50%;
@@ -463,6 +469,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 .p-6 {
   padding: 1.5rem;

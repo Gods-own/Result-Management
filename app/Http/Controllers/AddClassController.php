@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
 use App\Models\Teacher;
 use App\Models\Classroom;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class AddClassController extends Controller
 {
@@ -15,6 +15,7 @@ class AddClassController extends Controller
         $this->user = $user;
         $this->teacher = $teacher;
         $this->class_room = $class_room;
+        $this->middleware(['auth']);
     }
 
     public function index()
@@ -24,34 +25,25 @@ class AddClassController extends Controller
         return view('addClass')->with('teachers', $teachers);
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
-        $teachers = Teacher::all();
+        try {
 
-        $names_of_teachers = array();
+            $validatedData = $request->validate([
+                'teacher' => ['required', 'unique:class_rooms,user_id', 'exists:users,id'],
+                'classroom' => ['required', 'max:255', 'unique:class_rooms,class_room'],
+            ]);
 
-        foreach($teachers as $name_of_teacher) 
-        {
-            array_push($names_of_teachers, $name_of_teacher->title.' '.$name_of_teacher->user->name);
+
+            Classroom::create([
+                'user_id' => $request->teacher,
+                'class_room' => $request->classroom,
+            ]);
+
+            return redirect()->route('dashboard');
+        } catch (Exception $ex) {
+            return back()->with('status', 'Could not add class, Something went wrong');
         }
 
-        $validatedData = $request->validate([
-            'teacher' => ['required', Rule::in($names_of_teachers)],
-            'classroom' => ['required', 'max:255'],
-        ]);
-
-        $teacher_name = explode(' ', $request->teacher, 2);
-
-        $user = User::where('name', $teacher_name[1])->get();
-
-        // dd($user);
-
-        $class_room = new Classroom();
-
-        $class_room->class_room = $request->classroom;
-
-        $user[0]->class_room()->save($class_room);
-
-        return redirect()->route('dashboard');
     }
 }

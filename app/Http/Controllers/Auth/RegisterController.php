@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Exception;
 use App\Models\User;
 use App\Models\Principal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -25,43 +27,37 @@ class RegisterController extends Controller
 
     public function store(Request $request) {
 
-        $check_names = User::all();
-
-        $names = array();
-
-        foreach($check_names as $name) 
-        {
-
-            array_push($names, $name->name);
-        }
-
         $validatedData = $request->validate([
-            'name' => ['required', 'max:35', Rule::notIn($names)],
+            'name' => ['required', 'max:35', 'unique:users,name'],
             'email' => ['required', 'email', 'max:255'],
-            'user_type' => ['required', 'starts_with:p', 'ends_with:l'],
+            'user_type' => ['required', Rule::in(['principal'])],
             'gender' => ['required'],
             'phoneNumber' => ['required', 'starts_with:0', 'numeric'],
             'password' => ['required', 'confirmed'],
 
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'gender' => $request->gender,
-            'phoneNumber' => $request->phoneNumber,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            DB::transaction(function () use ($request) {
 
-        $user->user_type = $request->user_type;
-        $user->save();
+                $user = User::create($request->all());
 
-        $principal = new Principal();
+                $user->password = Hash::make($request->password);
+                $user->user_type = $request->user_type;
+                $user->save();
 
-        $user->principal()->save($principal);
+                $principal = new Principal();
 
-        auth()->attempt($request->only('email', 'password'));
+                $user->principal()->save($principal);
 
-        return redirect()->route('dashboard');
+            });
+
+            auth()->attempt($request->only('email', 'password'));
+
+            return redirect()->route('dashboard');
+
+        } catch (Exception $ex) {
+            return back()->with('status', 'Could not register, something went wrong');
+        }
     }
 }

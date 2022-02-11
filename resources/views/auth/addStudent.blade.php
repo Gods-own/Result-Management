@@ -17,7 +17,7 @@
                 <div class="mb-4">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}">
-                    @error('email'
+                    @error('email')
                     <div>
                         {{ $message }}
                     </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phonNumber') }}">
+                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
                     @error('phoneNumber')
                     <div>
                         {{ $message }}
@@ -57,7 +57,7 @@
                     <label for="classroom">Classroom</label>
                     <select id="classroom" name="classroom">
                         @foreach($classrooms as $classroom)
-                            <option>{{ $classroom }}</option>
+                            <option value="{{ $classroom->id }}">{{ $classroom->class_room }}</option>
                         @endforeach
                     </select>
                     @error('classroom')
@@ -70,7 +70,7 @@
                     <label for="studenttype">Student Type</label>
                     <select id="studenttype" name="studenttype">
                         @foreach($studenttypes as $studenttype)
-                            <option>{{ $studenttype }}</option>
+                            <option value="{{ $studenttype->id }}">{{ $studenttype->student_type }}</option>
                         @endforeach
                     </select>
                     @error('studenttype')
@@ -83,7 +83,7 @@
                     <label for="schoolSession">Session</label>
                     <select id="schoolSession" name="schoolSession">
                         @foreach($schoolSessions as $schoolSession)
-                            <option>{{ $schoolSession }}</option>
+                            <option value="{{ $schoolSession->id }}">{{ $schoolSession->session_start }} to {{ $schoolSession->session_end }}</option>
                         @endforeach
                     </select>
                     @error('schoolSession')
