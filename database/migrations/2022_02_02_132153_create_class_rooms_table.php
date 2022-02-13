@@ -16,7 +16,7 @@ class CreateClassRoomsTable extends Migration
         Schema::create('class_rooms', function (Blueprint $table) {
             $table->id()->unsigned();
             $table->string('class_room', 8)->unique();
-            $table->unsignedBiginteger('user_id');
+            $table->unsignedBiginteger('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

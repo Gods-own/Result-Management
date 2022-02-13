@@ -8,8 +8,13 @@ use App\Models\User;
 
 class AdminDashboardController extends Controller
 {
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+    
     public function index() 
     {
-        return view('adminDashboard');
+        return view('dashboards.adminDashboard');
     }
 }

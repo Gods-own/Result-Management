@@ -3,7 +3,7 @@
 @section('content')
    <div class="flex justify-center">
         <div class="w-6/12 bg-white p-6 rounded-lg">
-            <form action="{{ route('register') }}" method="post">
+            <form action="{{ route('register') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="mb-4">
                     <label for="name">Name</label>
@@ -39,6 +39,15 @@
                     <label for="phoneNumber">Phone Number</label>
                     <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
                     @error('phoneNumber')
+                    <div>
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="profile_pic">Profile Picture</label>
+                    <input type="file" name="profile_pic" id="profile_pic" value="{{ old('profile_pic') }}">
+                    @error('profile_pic')
                     <div>
                         {{ $message }}
                     </div>

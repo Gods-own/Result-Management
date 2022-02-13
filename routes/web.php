@@ -6,9 +6,17 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\AddTeacherController;
 use App\Http\Controllers\Auth\AddStudentController;
-use App\Http\Controllers\AddSubjectController;
-use App\Http\Controllers\AddClassController;
+use App\Http\Controllers\Admin\SessionController;
+use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Dashboards\DashboardController;
+use App\Http\Controllers\Dashboards\AdminDashboardController;
+use App\Http\Controllers\Dashboards\TeacherDashboardController;
+use App\Http\Controllers\Dashboards\StudentDashboardController;
+use App\Http\Controllers\Users\ViewTeacherController;
+use App\Http\Controllers\Users\ViewStudentController;
 
 
 /*
@@ -30,18 +38,40 @@ Route::post('/add_teacher', [AddTeacherController::class, 'store']);
 Route::get('/add_student', [AddStudentController::class, 'index'])->name('add_student');
 Route::post('/add_student', [AddStudentController::class, 'store']);
 
-Route::get('/add_class', [AddClassController::class, 'index'])->name('add_class');
-Route::post('/add_class', [AddClassController::class, 'store']);
+Route::get('/add_class', [ClassController::class, 'index'])->name('add_class');
+Route::post('/add_class', [ClassController::class, 'store']);
+Route::get('/class_room/{class_room}/edit', [ClassController::class, 'edit'])->name('edit_class');
+Route::put('/class_room/{class_room}', [ClassController::class, 'update'])->name('update_class');
 
-Route::get('/add_subject', [AddSubjectController::class, 'index'])->name('add_subject');
-Route::post('/add_subject', [AddSubjectController::class, 'store']);
+Route::get('/add_subject', [SubjectController::class, 'index'])->name('add_subject');
+Route::post('/add_subject', [SubjectController::class, 'store']);
+Route::get('/subject/{subject}/edit', [SubjectController::class, 'edit'])->name('edit_subject');
+Route::put('/subject/{subject}', [SubjectController::class, 'update'])->name('update_subject');
+
+Route::get('/add_session', [SessionController::class, 'index'])->name('add_session');
+Route::post('/add_session', [SessionController::class, 'store']);
+Route::get('/session/{session}/edit', [SessionController::class, 'edit'])->name('edit_session');
+Route::put('/session/{session}', [SessionController::class, 'update'])->name('update_session');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
+Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('admin_dashboard');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/teacher/{user}/edit', [TeacherController::class, 'edit'])->name('edit_teacherInfo');
+Route::put('/teacher/{user}', [TeacherController::class, 'update'])->name('update_teacherInfo');
+Route::delete('/teacher/{user}/delete', [TeacherController::class, 'destroy'])->name('delete_teacherInfo');
+
+Route::get('/student/{user}/edit', [StudentController::class, 'edit'])->name('edit_studentInfo');
+Route::put('/student/{user}', [StudentController::class, 'update'])->name('update_studentInfo');
+Route::delete('/student/{user}/delete', [StudentController::class, 'destroy'])->name('delete_studentInfo');
+
+Route::get('/teachers_lists', [ViewTeacherController::class, 'index'])->name('view_teachers');
+Route::get('/students_lists', [ViewStudentController::class, 'index'])->name('view_students');
 
 
 

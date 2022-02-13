@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeUserIdToUniqueInClassRoomsTable extends Migration
+class RemoveProfilePicColumnFromStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class ChangeUserIdToUniqueInClassRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::table('class_rooms', function (Blueprint $table) {
-            $table->unsignedBiginteger('user_id')->unique()->change();
+        Schema::table('students', function (Blueprint $table) {
+            $table->dropColumn('profile_pic');
         });
     }
 
@@ -25,8 +25,8 @@ class ChangeUserIdToUniqueInClassRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::table('class_rooms', function (Blueprint $table) {
-            $table->unsignedBiginteger('user_id')->unique(false)->change();
+        Schema::table('students', function (Blueprint $table) {
+            $table->string('profile_pic');
         });
     }
 }

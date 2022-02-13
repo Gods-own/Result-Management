@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
 use App\Models\Subject;
 use App\Models\SubjectType;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 
-class AddSubjectController extends Controller
+class SubjectController extends Controller
 {
     public function __construct(Subject $subject)
     {
@@ -20,7 +21,7 @@ class AddSubjectController extends Controller
     {
         $subject_types = SubjectType::all();
 
-        return view('addSubject')->with('subjecttypes', $subject_types);
+        return view('admin.addSubject')->with('subjecttypes', $subject_types);
     }
 
     public function store(Request $request)
@@ -42,5 +43,33 @@ class AddSubjectController extends Controller
         } catch(Exception $ex) {
             return back()->with('status', 'Could not add subjects, something went wrong');
         }
+    }
+
+    public function edit(Subject $subject) {
+
+        return view('admin.editSubject')->with('subject', $subject);
+    }
+
+    public function update(Request $request, Subject $subject) {
+        try {
+
+            $validatedData = $request->validate([
+                'subject' => ['required', 'unique:subjects,subject'],
+            ]);
+
+
+            $subject->update([
+                'subject' => $request->subject,
+            ]);
+
+            return redirect()->route('admin_dashboard');
+        } catch (Exception $ex) {
+            return back()->with('status', 'Could not Update, Something went wrong');
+        }
+    }
+
+    public function destroy(Subject $subject) {
+        $subject->delete();
+        return redirect()->route('admin_dashboard');
     }
 }

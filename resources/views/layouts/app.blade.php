@@ -17,6 +17,7 @@
                 <li class="inline bg-blue-500"><a href="{{ route('register') }}">Register</a></li>
                 @endguest
                 @auth
+                <li class="inline bg-blue-500"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf

@@ -6,7 +6,7 @@
             @if (session('status'))
                 <p>{{ session('status') }}</p>
             @endif
-            <form action="{{ route('add_teacher') }}" method="post">
+            <form action="{{ route('add_teacher') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="mb-4">
                     <label for="title">Title</label>
@@ -54,6 +54,15 @@
                     <label for="phoneNumber">Phone Number</label>
                     <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
                     @error('phoneNumber')
+                    <div>
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+                <div class="mb-4">
+                    <label for="profile_pic">Profile Picture</label>
+                    <input type="file" name="profile_pic" id="profile_pic" value="{{ old('profile_pic') }}">
+                    @error('profile_pic')
                     <div>
                         {{ $message }}
                     </div>
