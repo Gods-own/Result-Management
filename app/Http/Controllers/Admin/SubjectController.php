@@ -39,7 +39,7 @@ class SubjectController extends Controller
 
             $subject->save();
 
-            return redirect()->route('dashboard');
+            return redirect()->route('admin_dashboard');
         } catch(Exception $ex) {
             return back()->with('status', 'Could not add subjects, something went wrong');
         }

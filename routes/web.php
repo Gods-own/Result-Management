@@ -11,12 +11,15 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\SubjectTaughtController;
+use App\Http\Controllers\Admin\ClassTypeController;
 use App\Http\Controllers\Dashboards\DashboardController;
 use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\TeacherDashboardController;
 use App\Http\Controllers\Dashboards\StudentDashboardController;
 use App\Http\Controllers\Users\ViewTeacherController;
 use App\Http\Controllers\Users\ViewStudentController;
+use App\Http\Controllers\Teacher\RecordTest1Controller;
 
 
 /*
@@ -60,6 +63,8 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/dashboard/admin', [AdminDashboardController::class, 'index'])->name('admin_dashboard');
 
+Route::get('/dashboard/teacher', [TeacherDashboardController::class, 'index'])->name('teacher_dashboard');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/teacher/{user}/edit', [TeacherController::class, 'edit'])->name('edit_teacherInfo');
@@ -73,6 +78,14 @@ Route::delete('/student/{user}/delete', [StudentController::class, 'destroy'])->
 Route::get('/teachers_lists', [ViewTeacherController::class, 'index'])->name('view_teachers');
 Route::get('/students_lists', [ViewStudentController::class, 'index'])->name('view_students');
 
+Route::get('/teacher_subject', [SubjectTaughtController::class, 'index'])->name('teacher_subject');
+Route::post('/teacher_subject', [SubjectTaughtController::class, 'store']);
+
+Route::get('/class_type', [ClassTypeController::class, 'index'])->name('class_type');
+Route::post('/class_type', [ClassTypeController::class, 'store']);
+
+Route::get('/record_test1/{subject}', [RecordTest1Controller::class, 'index'])->name('record_test1');
+Route::get('/record_test1/{user}/{subject}', [RecordTest1Controller::class, 'show'])->name('test1');
 
 
 // Route::get('/dashboard/staff', [TeacherDashboardController::class, 'index'])->name('teacherDashboard');

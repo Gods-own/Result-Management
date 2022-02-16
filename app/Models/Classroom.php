@@ -21,8 +21,13 @@ class Classroom extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function students() 
+    public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function subject_types() {
+        return $this->belongstoMany(SubjectType::class, 'class_subject_type', 'class_id', 'subject_type_id')
+            ->using(ClassType::class);
     }
 }

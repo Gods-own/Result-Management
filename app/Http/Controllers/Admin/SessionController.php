@@ -21,7 +21,7 @@ class SessionController extends Controller
         return view('admin.addSession');
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         try {
             $request->validate([
@@ -31,7 +31,7 @@ class SessionController extends Controller
 
             Session::create($request->all());
 
-            return redirect()->route('dashboard');
+            return redirect()->route('admin_dashboard');
 
         } catch(Exception $ex) {
             return back()->with('status', 'Could not add session, something went wrong');
@@ -39,13 +39,13 @@ class SessionController extends Controller
 
     }
 
-    public function edit(Session $session) 
+    public function edit(Session $session)
     {
         return view('admin.editSession')->with('session', $session);
 
     }
 
-    public function update(Request $request, Session $session) 
+    public function update(Request $request, Session $session)
     {
         try{
             $validatedData = $request->validate([
@@ -57,7 +57,7 @@ class SessionController extends Controller
             return redirect()->route('admin_dashboard');
         } catch (Exception $ex) {
             return back()->with('status', 'Could not update, something went wrong');
-        }    
+        }
 
     }
 

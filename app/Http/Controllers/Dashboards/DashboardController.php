@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index() 
+    public function index()
     {
         if (Auth::user()->user_type == 'principal') {
             return redirect()->route('admin_dashboard');
         }
         elseif (Auth::user()->user_type == 'staff') {
-            return view('dashboards.teacherDashboard');
+            return redirect()->route('teacher_dashboard');
         }
         else {
             return view('dashboards.studentDashboard');

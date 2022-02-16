@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {
-    public function edit(User $user) 
+    public function edit(User $user)
     {
         return view('admin.editTeacher')->with('user', $user);
     }
 
-    public function update(Request $request, User $user) 
+    public function update(Request $request, User $user)
     {
 
         try{
@@ -50,10 +50,11 @@ class TeacherController extends Controller
             return redirect()->route('admin_dashboard');
         } catch (Exception $ex) {
             return back()->with('status', 'Could not update, something went wrong');
-        }    
+        }
     }
 
     public function destroy(User $user) {
+        $this->authorize('delete', $user);
         $user->delete();
         return redirect()->route('admin_dashboard');
     }

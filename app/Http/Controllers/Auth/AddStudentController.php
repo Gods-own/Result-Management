@@ -45,7 +45,7 @@ class AddStudentController extends Controller
             'profile_pic' => ['required', 'image', 'mimes:jpeg,bmp,png'],
             'user_type' => ['required', Rule::in(['student'])],
             'gender' => ['required'],
-            'phoneNumber' => ['required', 'starts_with:0', 'numeric'],
+            'phoneNumber' => ['required', 'unique:users,phoneNumber', 'starts_with:0', 'numeric'],
             'studenttype' => ['required', 'exists:student_types,id'],
             'classroom' => ['required', 'exists:class_rooms,id'],
             'schoolSession' => ['required', 'exists:sessions,id'],

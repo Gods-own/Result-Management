@@ -18,8 +18,9 @@
                     <td>{{ $teacher->teacher->title }}</td>
                     <td>{{ $teacher->name }}</td>
                     <td>{{ $teacher->email }}</td>
-                    <td><img src="{{ asset('storage/profile_picture/'.$teacher->profile_pic) }}"></td>
+                    <td><img src="{{ url('storage/profile_picture/'.$teacher->profile_pic) }}"></td>
                     <td>{{ $teacher->phoneNumber }}</td>
+                    @can('delete', $teacher)
                     <td>
                         <form action="{{ Route('edit_teacherInfo', [$teacher->id]) }}">
                             <button type="submit">Edit</button>
@@ -32,6 +33,7 @@
                             <button>Delete</button>
                         </form>
                     </td>
+                    @endcan
                 </tr>
             @endforeach
             </tbody>

@@ -5,7 +5,6 @@
         <table>
             <thead>
                 <tr>
-                    <th>Title</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Picture</th>
@@ -15,11 +14,11 @@
             <tbody>
             @foreach($students as $student)
                 <tr>
-                    <td>{{ $student->student->title }}</td>
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->email }}</td>
                     <td><img src="{{ asset('storage/profile_picture/'.$student->profile_pic) }}"></td>
                     <td>{{ $student->phoneNumber }}</td>
+                    @can('delete', $student)
                     <td>
                         <form action="{{ Route('edit_studentInfo', [ $student->id]) }}">
                             <button type="submit">Edit</button>
@@ -32,6 +31,7 @@
                             <button>Delete</button>
                         </form>
                     </td>
+                    @endcan
                 </tr>
             @endforeach
             </tbody>

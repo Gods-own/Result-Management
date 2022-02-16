@@ -41,7 +41,7 @@ class AddTeacherController extends Controller
             'profile_pic' => ['required', 'image', 'mimes:jpeg,bmp,png'],
             'user_type' => ['required', Rule::in(['staff'])],
             'gender' => ['required'],
-            'phoneNumber' => ['required', 'starts_with:0', 'numeric'],
+            'phoneNumber' => ['required', 'unique:users,phoneNumber', 'starts_with:0', 'numeric'],
             'password' => ['required', 'confirmed'],
 
         ]);

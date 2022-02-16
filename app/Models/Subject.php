@@ -14,12 +14,12 @@ class Subject extends Model
     ];
 
     public function subject_types() {
-        return $this->belongsTo(SubjectType::class);
+        return $this->belongsTo(SubjectType::class, 'subject_type_id');
     }
 
     public function users() {
-        return $this->belongstoMany(User::class, 'subject_teacher', 'subject_id', 'teacher_id')
-            ->withTimestamps();
+        return $this->belongstoMany(User::class, 'subject_teacher', 'teacher_id', 'subject_id')
+            ->using(SubjectTaught::class);
     }
 
 

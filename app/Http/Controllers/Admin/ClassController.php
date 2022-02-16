@@ -41,7 +41,7 @@ class ClassController extends Controller
                 'class_room' => $request->classroom,
             ]);
 
-            return redirect()->route('dashboard');
+            return redirect()->route('admin_dashboard');
         } catch (Exception $ex) {
             return back()->with('status', 'Could not add class, Something went wrong');
         }
