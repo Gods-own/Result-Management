@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Subject;
-use App\Models\SubjectType;
+use App\Models\Session;
+use App\Models\Classroom;
 
 class TeacherDashboardController extends Controller
 {
@@ -26,20 +26,31 @@ class TeacherDashboardController extends Controller
 
         // $subjecttypes = $subjecttype->class_rooms;
 
-        $subject = Subject::find(1);
+        // dd($subjecttypes);
+
+        // $subject = Subject::find(1);
+
+        // $classroom = Classroom::find(1);
 
         // dd($subject->subject_types->class_rooms);
 
-        $subject_type = SubjectType::find(4);
+        // $subject_type = SubjectType::find(4);
 
-        dd($subject_type->subjects);
+        // dd($classroom->subject_types);
+
+        $session = Session::latest()->first();
 
         $subjects = $user->subjects;
+        $classrooms = Classroom::where('user_id', $user->id)->get();
+        $isClassTeacher = $classrooms->isEmpty();
+
+        // dd($class_room->class_room);
 
         // foreach($subjecttypes as $subjecttype) {
         //     dd($subjecttype->id);
         // }
 
-        return view('dashboards.teacherDashboard')->with('subjects', $subjects);
+        return view('dashboards.teacherDashboard')->with('subjects', $subjects)
+            ->with('isClassTeacher', $isClassTeacher)->with('classrooms', $classrooms);
     }
 }

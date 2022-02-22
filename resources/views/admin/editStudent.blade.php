@@ -6,7 +6,7 @@
             @if (session('status'))
                 <p>{{ session('status') }}</p>
             @endif
-            <form action="{{ Route('update_teacherInfo', ['user' => $user->id]) }}" enctype="multipart/form-data"  method="post">
+            <form action="{{ Route('update_studentInfo', ['user' => $user->id]) }}" enctype="multipart/form-data"  method="post">
                 @method('PUT')
                 @csrf
                 <div class="mb-4">

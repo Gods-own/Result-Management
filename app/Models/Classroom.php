@@ -23,11 +23,11 @@ class Classroom extends Model
 
     public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'class_room_id');
     }
 
     public function subject_types() {
-        return $this->belongstoMany(SubjectType::class, 'class_subject_type', 'class_id', 'subject_type_id')
+        return $this->belongsToMany(SubjectType::class, 'class_subject_type', 'class_id', 'subject_type_id')
             ->using(ClassType::class);
     }
 }

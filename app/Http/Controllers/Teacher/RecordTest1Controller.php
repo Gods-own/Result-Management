@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Teacher;
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
 use App\Models\Session;
+use App\Models\Student;
 use App\Models\Term;
 use App\Models\Classroom;
 use App\Models\Test1;
@@ -15,7 +15,7 @@ use App\Models\User;
 
 class RecordTest1Controller extends Controller
 {
-    public function index(Subject $subject)
+    public function index(Subject $subject, Classroom $classroom)
     {
 
         // $user = Auth::user();
@@ -38,49 +38,56 @@ class RecordTest1Controller extends Controller
         // }
 
 
-        $session = Session::latest()->first();
+        $session = Session::firstorNew([
+            'is_current' => true
+        ]);
 
-        $terms = Term::all();
+        // $users = User::where('user_type', 'student')->student();
 
-        $users = User::where('user_type', 'student')->get();
+        $students = Student::where([
+            ['session_id', $session->id],
+            ['class_room_id', $classroom->id],
+        ])->get();
 
-        return view('teacher.recordtest1')->with('subject', $subject)->with('session', $session)->with('terms', $terms)
-            ->with('users', $users);
+        return view('teacher.recordtest1')->with('subject', $subject)
+            ->with('students', $students)->with('class_room', $classroom);
     }
 
-    public function show(User $user, Subject $subject)
+    public function show(User $user, Subject $subject, Classroom $classroom)
     {
 
-        $session = Session::latest()->first();
+        $session = Session::firstorNew([
+            'is_current' => true
+        ]);
 
-        $terms = Term::all();
-
-        $class_room =  Classroom::where('user_id', $user->id)->latest()->first();
+        $term = Term::firstorNew([
+            'is_current' => true
+        ]);
 
         return view('teacher.test1form')->with('subject', $subject)->with('user', $user)
-            ->with('session', $session)->with('terms', $terms)->with('class_room', $class_room);
+            ->with('session', $session)->with('term', $term)->with('class_room', $classroom);
     }
 
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => ['required', 'max:35', 'unique:users,name'],
+            'name' => ['required', 'max:35', 'exists:users,id'],
             'term' => ['required', 'exists:terms,id'],
-            'session' => ['required', 'exists:session,id'],
-            'classroom' => ['required', 'exists:class_rooms,id'],
             'subject' => ['required', 'exists:subjects,id'],
-            'test1' => ['required', 'integer'],
+            'test1' => ['required', 'integer', 'max:20'],
         ]);
 
         try {
             $test1 = new Test1();
             $test1->fill($request->all());
 
-            $test1->subject_type_id = $request->subjecttype;
+            $test1->student_id = $request->name;
+            $test1->term_id = $request->term;
+            $test1->subject_id = $request->subject;
 
             $test1->save();
 
-            return redirect()->route('admin_dashboard');
+            return redirect()->route('teacher_dashboard');
         } catch(Exception $ex) {
             return back()->with('status', 'Could not add subjects, something went wrong');
         }

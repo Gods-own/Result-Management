@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <form action="{{ route('test1', [$user->id, $subject->id, $class_room->id]) }}" method="post">
+    <form action="{{ route('result', [$user->id, $class_room->id, $subject->id]) }}" method="post">
         @csrf
         <div>
             <label for="name">Name</label>
@@ -44,8 +44,52 @@
         </div>
         <div>
             <label for="test1">Test1</label>
-            <input type="text" name="test1" id="test1" value="">
+            <input disabled type="text" id="test1" value="{{ $test1->test1 }}">
+            <input type="hidden" name="test1" value="{{ $test1->id }}">
             @error('test1')
+                <div>
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div>
+            <label for="test2">Test2</label>
+            <input disabled type="text" id="test2" value="{{ $test2->test2 }}">
+            <input type="hidden" name="test2" value="{{ $test2->id }}">
+            @error('test2')
+                <div>
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div>
+            <label for="exam">Exam</label>
+            <input disabled type="text" id="exam" value="{{ $exam->exam }}">
+            <input type="hidden" name="exam" value="{{ $exam->id }}">
+            @error('exam')
+                <div>
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div>
+            <label for="total">Total Score</label>
+            <input disabled type="number" id="total" value="{{ $total }}">
+            <input type="hidden" name="total" value="{{ $total }}">
+            @error('total')
+                <div>
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div>
+            <label for="grade">Grade</label>
+            <select name="grade">
+                @foreach ($grades as $grade)
+                    <option value="{{ $grade }}">{{ $grade }}</option>
+                @endforeach
+            </select>   
+            @error('grade')
                 <div>
                     {{ $message }}
                 </div>

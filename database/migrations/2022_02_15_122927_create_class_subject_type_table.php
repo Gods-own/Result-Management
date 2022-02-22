@@ -14,7 +14,7 @@ class CreateClassSubjectTypeTable extends Migration
     public function up()
     {
         Schema::create('class_subject_type', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->unsignedBiginteger('subject_type_id');
             $table->foreign('subject_type_id')->references('id')->on('subject_types')->onDelete('cascade');
             $table->unsignedBiginteger('class_id');

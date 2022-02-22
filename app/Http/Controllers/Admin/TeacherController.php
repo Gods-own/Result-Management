@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class TeacherController extends Controller
 {
@@ -28,9 +29,15 @@ class TeacherController extends Controller
 
             ]);
 
+            $image_path = public_path('storage/profile_picture/'.$user->profile_pic);
+
+            // dd($image_path);
+
+            File::delete($image_path);
+
             $file = $request->profile_pic;
 
-            $path = $file->hashName('public/profil_picture');
+            $path = $file->hashName('public/profile_picture');
             // avatars/bf5db5c75904dac712aea27d45320403.jpeg
 
             $image = Image::make($file);
@@ -41,12 +48,15 @@ class TeacherController extends Controller
 
             Storage::put($path, (string) $image->encode());
 
-            $user->update([
+            $user->fill([
                 'name' => $request->name,
                 'email' => $request->email,
-                'profile_pic' => $file->hashName(),
                 'phoneNumber' => $request->phoneNumber,
             ]);
+
+            $user->profile_pic = $file->hashName();
+            $user->save();
+
             return redirect()->route('admin_dashboard');
         } catch (Exception $ex) {
             return back()->with('status', 'Could not update, something went wrong');

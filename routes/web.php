@@ -20,6 +20,9 @@ use App\Http\Controllers\Dashboards\StudentDashboardController;
 use App\Http\Controllers\Users\ViewTeacherController;
 use App\Http\Controllers\Users\ViewStudentController;
 use App\Http\Controllers\Teacher\RecordTest1Controller;
+use App\Http\Controllers\Teacher\RecordTest2Controller;
+use App\Http\Controllers\Teacher\RecordExamController;
+use App\Http\Controllers\Teacher\RecordResultController;
 
 
 /*
@@ -84,8 +87,21 @@ Route::post('/teacher_subject', [SubjectTaughtController::class, 'store']);
 Route::get('/class_type', [ClassTypeController::class, 'index'])->name('class_type');
 Route::post('/class_type', [ClassTypeController::class, 'store']);
 
-Route::get('/record_test1/{subject}', [RecordTest1Controller::class, 'index'])->name('record_test1');
-Route::get('/record_test1/{user}/{subject}', [RecordTest1Controller::class, 'show'])->name('test1');
+Route::get('/record_test1/{subject}/{classroom}', [RecordTest1Controller::class, 'index'])->name('record_test1');
+Route::get('/record_test1/{user}/{subject}/{classroom}', [RecordTest1Controller::class, 'show'])->name('test1');
+Route::post('/record_test1/{user}/{subject}/{classroom}', [RecordTest1Controller::class, 'store']);
+
+Route::get('/record_test2/{subject}/{classroom}', [RecordTest2Controller::class, 'index'])->name('record_test2');
+Route::get('/record_test2/{user}/{subject}/{classroom}', [RecordTest2Controller::class, 'show'])->name('test2');
+Route::post('/record_test2/{user}/{subject}/{classroom}', [RecordTest2Controller::class, 'store']);
+
+Route::get('/record_exam/{subject}/{classroom}', [RecordExamController::class, 'index'])->name('record_exam');
+Route::get('/record_exam/{user}/{subject}/{classroom}', [RecordExamController::class, 'show'])->name('exam');
+Route::post('/record_exam/{user}/{subject}/{classroom}', [RecordExamController::class, 'store']);
+
+Route::get('/record_result/{classroom}/{subject}', [RecordResultController::class, 'index'])->name('record_result');
+Route::get('/record_result/{user}/{classroom}/{subject}', [RecordResultController::class, 'show'])->name('result');
+Route::post('/record_result/{user}/{classroom}/{subject}', [RecordResultController::class, 'store']);
 
 
 // Route::get('/dashboard/staff', [TeacherDashboardController::class, 'index'])->name('teacherDashboard');

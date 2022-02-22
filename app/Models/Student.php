@@ -19,7 +19,7 @@ class Student extends Model
     }
 
     public function student_types() {
-        return $this->belongsTo(StudentType::class);
+        return $this->belongsTo(StudentType::class, 'student-type_id');
     }
 
     public function sessions()
@@ -29,6 +29,6 @@ class Student extends Model
 
     public function class_rooms()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsTo(Classroom::class, 'class_room_id');
     }
 }

@@ -20,7 +20,7 @@ class SubjectType extends Model
     }
 
     public function class_rooms() {
-        return $this->belongstoMany(Classroom::class, 'class_subject_type', 'class_id', 'subject_type_id')
+        return $this->belongsToMany(Classroom::class, 'class_subject_type', 'subject_type_id', 'class_id')
             ->using(ClassType::class);
     }
 }

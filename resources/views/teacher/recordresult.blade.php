@@ -8,7 +8,7 @@
             <img>
             <p>{{ $student->user->name }}</p>
         </div>
-        <form action="{{route('test2', [$student->user->id, $subject->id, $class_room->id])}}">
+        <form action="{{route('result', [$student->user->id, $class_room->id, $subject->id])}}">
             <button>Record</button>
         </form>
         <form action="">

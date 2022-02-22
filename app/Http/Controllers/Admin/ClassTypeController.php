@@ -21,7 +21,7 @@ class ClassTypeController extends Controller
 
     public function store(Request $request)
     {
-        // try {
+        try {
             $request->validate([
                 'class_room' => ['required', 'exists:class_rooms,id'],
                 'subject_type' => ['required', 'exists:subject_types,id'],
@@ -36,9 +36,9 @@ class ClassTypeController extends Controller
 
             return redirect()->route('admin_dashboard');
 
-        // } catch(Exception $ex) {
-        //     return back()->with('status', 'Something went wrong');
-        // }
+        } catch(Exception $ex) {
+            return back()->with('status', 'Something went wrong');
+        }
 
     }
 }

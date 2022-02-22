@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-    <form action="{{ route('test1', [$user->id, $subject->id, $class_room->id]) }}" method="post">
+    <form action="{{ route('exam', [$user->id, $subject->id, $class_room->id]) }}" method="post">
         @csrf
         <div>
             <label for="name">Name</label>
@@ -43,9 +43,9 @@
             @enderror
         </div>
         <div>
-            <label for="test1">Test1</label>
-            <input type="text" name="test1" id="test1" value="">
-            @error('test1')
+            <label for="exam">Exam</label>
+            <input type="text" name="exam" id="exam" value="">
+            @error('exam')
                 <div>
                     {{ $message }}
                 </div>
