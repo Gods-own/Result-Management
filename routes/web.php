@@ -18,11 +18,15 @@ use App\Http\Controllers\Dashboards\AdminDashboardController;
 use App\Http\Controllers\Dashboards\TeacherDashboardController;
 use App\Http\Controllers\Dashboards\StudentDashboardController;
 use App\Http\Controllers\Users\ViewTeacherController;
+use App\Http\Controllers\Users\ViewResultController;
 use App\Http\Controllers\Users\ViewStudentController;
+use App\Http\Controllers\Users\ViewClassesController;
 use App\Http\Controllers\Teacher\RecordTest1Controller;
 use App\Http\Controllers\Teacher\RecordTest2Controller;
 use App\Http\Controllers\Teacher\RecordExamController;
 use App\Http\Controllers\Teacher\RecordResultController;
+use App\Http\Controllers\Admin\AddRemarkController;
+use App\Http\Controllers\Teacher\AddRemarkController as TeacherRemarkController;
 
 
 /*
@@ -70,6 +74,12 @@ Route::get('/dashboard/teacher', [TeacherDashboardController::class, 'index'])->
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+Route::post('/pricipal_remark/{student}', [AddRemarkController::class, 'show'])->name('principal_remark');
+Route::post('/principal_remark', [AddRemarkController::class, 'store'])->name('store_principal_remark');
+
+Route::post('/teacher_remark/{student}', [TeacherRemarkController::class, 'show'])->name('teacher_remark');
+Route::post('/teacher_remark', [TeacherRemarkController::class, 'store'])->name('store_teacher_remark');
+
 Route::get('/teacher/{user}/edit', [TeacherController::class, 'edit'])->name('edit_teacherInfo');
 Route::put('/teacher/{user}', [TeacherController::class, 'update'])->name('update_teacherInfo');
 Route::delete('/teacher/{user}/delete', [TeacherController::class, 'destroy'])->name('delete_teacherInfo');
@@ -79,7 +89,15 @@ Route::put('/student/{user}', [StudentController::class, 'update'])->name('updat
 Route::delete('/student/{user}/delete', [StudentController::class, 'destroy'])->name('delete_studentInfo');
 
 Route::get('/teachers_lists', [ViewTeacherController::class, 'index'])->name('view_teachers');
+
 Route::get('/students_lists', [ViewStudentController::class, 'index'])->name('view_students');
+
+Route::post('/result/{student}', [ViewResultController::class, 'show'])->name('view_result');
+Route::post('/convert_to_pdf/{student}', [ViewResultController::class, 'pdfConvert'])->name('convert_to_pdf');
+Route::post('/convert_to_excel/{student}', [ViewResultController::class, 'excelConvert'])->name('convert_to_excel');
+
+Route::get('/class_lists', [ViewClassesController::class, 'index'])->name('view_classes');
+Route::post('/class_lists/{classroom}', [ViewClassesController::class, 'show'])->name('view_classStudents');
 
 Route::get('/teacher_subject', [SubjectTaughtController::class, 'index'])->name('teacher_subject');
 Route::post('/teacher_subject', [SubjectTaughtController::class, 'store']);

@@ -11,5 +11,6 @@
     <li><a href="{{ route('class_type') }}">Class Type</a></li>
     <li><a href="{{ route('view_teachers') }}">View Teachers</a></li>
     <li><a href="{{ route('view_students') }}">View Students</a></li>
+    <li><a href="{{ route('view_classes') }}">View Classes</a></li>
 </ul>
 @endsection

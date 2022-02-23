@@ -18,4 +18,9 @@ class Session extends Model
     {
         return $this->hasMany(Student::class);
     }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class);
+    }
 }

@@ -14,33 +14,38 @@ class Result extends Model
         'grade',
     ];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function subjects() 
+    public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
 
-    public function test1() 
+    public function test1()
     {
         return $this->belongsTo(Test1::class);
     }
 
-    public function test2() 
+    public function test2()
     {
         return $this->belongsTo(Test2::class);
     }
 
-    public function exam() 
+    public function exam()
     {
         return $this->belongsTo(Exam::class);
     }
 
-    public function term() 
+    public function term()
     {
         return $this->belongsTo(Term::class);
+    }
+
+    public function session()
+    {
+        return $this->belongsTo(Session::class);
     }
 }

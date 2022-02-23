@@ -23,12 +23,13 @@ class SessionController extends Controller
 
     public function store(Request $request)
     {
-        try {
+
             $request->validate([
                 'session_start' => ['required', 'date'],
                 'session_end' => ['required', 'date'],
             ]);
 
+        try {    
             Session::create($request->all());
 
             return redirect()->route('admin_dashboard');
