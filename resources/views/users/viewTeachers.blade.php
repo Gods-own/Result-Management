@@ -20,12 +20,14 @@
                     <td>{{ $teacher->email }}</td>
                     <td><img src="{{ url('storage/profile_picture/'.$teacher->profile_pic) }}"></td>
                     <td>{{ $teacher->phoneNumber }}</td>
-                    @can('delete', $teacher)
+                    @can('update', $teacher)
                     <td>
                         <form action="{{ Route('edit_teacherInfo', [$teacher->id]) }}">
                             <button type="submit">Edit</button>
                         </form>
                     </td>
+                    @endcan
+                    @can('delete', $teacher)
                     <td>
                         <form action="{{ Route('delete_teacherInfo', [$teacher->id]) }}" method="post">
                             @method('DELETE')

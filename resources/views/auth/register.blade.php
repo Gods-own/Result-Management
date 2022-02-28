@@ -1,13 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-   <div class="flex justify-center">
-        <div class="w-6/12 bg-white p-6 rounded-lg">
-            <form action="{{ route('register') }}" enctype="multipart/form-data" method="post">
+   <div class="container py-10 sm:px-0 px-3 bg-jar-pattern">
+        <div class="py-6 lg:w-2/4 md:w-3/4 sm:w-11/12 mx-auto border-solid border border-gray-600 rounded-xl">
+            <form class="w-11/12 mx-auto" action="{{ route('register') }}" enctype="multipart/form-data" method="post">
                 @csrf
+                <div class="text-center text-2xl font-bold text-blue-600">
+                    <h1>REGISTER HERE</h1>
+                </div>
                 <div class="mb-4">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}">
+                    <label class="block mb-2" for="name">Name</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded px-3" type="text" name="name" id="name" value="{{ old('name') }}">
                     @error('name')
                     <div>
                         {{ $message }}
@@ -15,8 +18,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}">
+                    <label class="block mb-2" for="email">Email</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded px-3"  type="email" name="email" id="email" value="{{ old('email') }}">
                     @error('email')
                     <div>
                         {{ $message }}
@@ -36,8 +39,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
+                    <label class="block mb-2" for="phoneNumber">Phone Number</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded px-3"  type="tel" name="phoneNumber" id="phoneNumber" value="{{ old('phoneNumber') }}">
                     @error('phoneNumber')
                     <div>
                         {{ $message }}
@@ -45,8 +48,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="profile_pic">Profile Picture</label>
-                    <input type="file" name="profile_pic" id="profile_pic" value="{{ old('profile_pic') }}">
+                    <label class="block mb-2" for="profile_pic">Profile Picture</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded file:rounded file:border-none file:text-white file:h-9 file:bg-blue-500"  type="file" name="profile_pic" id="profile_pic" value="{{ old('profile_pic') }}">
                     @error('profile_pic')
                     <div>
                         {{ $message }}
@@ -54,8 +57,8 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" value="">
+                    <label class="block mb-2" for="password">Password</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded px-3"  type="password" name="password" id="password" value="">
                     @error('password')
                     <div>
                         {{ $message }}
@@ -63,16 +66,16 @@
                     @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="password_confirmation">Re-type Password</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" value="">
+                    <label class="block mb-2" for="password_confirmation">Re-type Password</label>
+                    <input class="w-full h-9 bg-slate-100 outline-none rounded px-3"  type="password" name="password_confirmation" id="password_confirmation" value="">
                     @error('password_confirmation')
                     <div>
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
-                <div class="mb-4">
-                    <button type="submit">Register</button>
+                <div class="mb-4 text-center">
+                    <button class="w-52 bg-blue-500 py-1.5 rounded-xl text-white" type="submit">Register</button>
                 </div>
             </form>
         </div>

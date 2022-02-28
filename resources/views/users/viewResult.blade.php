@@ -29,11 +29,11 @@
             </tbody>
         </table>
     </div>
-    <form action="{{ route('convert_to_pdf', [$result->user->id]) }}" method="post">
+    <form action="{{ route('convert_to_pdf', [$result->user->id, $result->session->id, $result->term->id]) }}" method="post">
         @csrf
         <button>Convert to Pdf</button>
     </form>
-    <form action="{{ route('convert_to_excel', [$result->user->id]) }}" method="post">
+    <form action="{{ route('convert_to_excel', [$result->user->id, $result->session->id, $result->term->id]) }}" method="post">
         @csrf
         <button>Convert to Excel</button>
     </form>

@@ -15,6 +15,8 @@ class AddRemarkController extends Controller
 {
     public function show(User $student) {
 
+        $this->authorize('teacher_remark', $student);
+
         $term = Term::firstorNew([
             'is_current' => true
         ]);
@@ -29,29 +31,30 @@ class AddRemarkController extends Controller
 
     public function store(Request $request)
     {
-            $request->validate([
-                'name' => ['required', 'exists:users,id'],
-                'term' => ['required', 'exists:terms,id'],
-                'session' => ['required', 'exists:sessions,id'],
-                'remark' => ['required'],
-            ]);
 
-            try {
-                $user = Auth::user();
-                $remark = new Remark();
-                $remark->fill($request->all());
-    
-                $remark->student_id = $request->name;
-                $remark->term_id = $request->term;
-                $remark->session_id = $request->session;
-                $remark->user_id = $user->id;
-    
-                $remark->save();
-    
-                return redirect()->route('teacher_dashboard');
-            } catch(Exception $ex) {
-                return back()->with('status', 'Could not add subjects, something went wrong');
-            }
+        $request->validate([
+            'name' => ['required', 'exists:users,id'],
+            'term' => ['required', 'exists:terms,id'],
+            'session' => ['required', 'exists:sessions,id'],
+            'remark' => ['required'],
+        ]);
+
+        try {
+            $user = Auth::user();
+            $remark = new Remark();
+            $remark->fill($request->all());
+
+            $remark->student_id = $request->name;
+            $remark->term_id = $request->term;
+            $remark->session_id = $request->session;
+            $remark->user_id = $user->id;
+
+            $remark->save();
+
+            return redirect()->route('teacher_dashboard');
+        } catch(Exception $ex) {
+            return back()->with('status', 'Could not add subjects, something went wrong');
+        }
 
     }
 }

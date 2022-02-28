@@ -32,4 +32,31 @@
             </form>
         </div>
     </div>
+
+    <button>Manage Sessions</button>
+
+    <div>
+        <h3>Change Current Session</h3>
+        <div>
+            <form action="{{ route('change_session') }}" method="post">
+                @csrf
+                @foreach ($sessions as $session)
+                    <input name="session" id="session" type="radio" {{ ($session->is_current == 1) ? "checked" : "" }} value="{{ $session->id }}">
+                    <label for="session">{{ $session->session_start }}</label>
+                @endforeach
+                @error('session')
+                <div>
+                    {{ $message }}
+                </div>
+                @enderror
+                <input type="hidden" name="currentSession" value="{{ $current_session->id }}">
+                @error('currentSession')
+                <div>
+                    {{ $message }}
+                </div>
+                @enderror
+                <button>Change</button>
+            </form>
+        </div>
+    </div>
 @endsection

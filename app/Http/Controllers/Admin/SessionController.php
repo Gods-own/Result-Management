@@ -6,6 +6,8 @@ use Exception;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class SessionController extends Controller
 {
@@ -17,8 +19,13 @@ class SessionController extends Controller
 
     public function index()
     {
+        $sessions = Session::all();
 
-        return view('admin.addSession');
+        $current_session = Session::firstorNew([
+            'is_current' => true
+        ]);
+
+        return view('admin.addSession')->with('sessions', $sessions)->with('current_session', $current_session);
     }
 
     public function store(Request $request)
@@ -29,7 +36,7 @@ class SessionController extends Controller
                 'session_end' => ['required', 'date'],
             ]);
 
-        try {    
+        try {
             Session::create($request->all());
 
             return redirect()->route('admin_dashboard');
@@ -39,6 +46,7 @@ class SessionController extends Controller
         }
 
     }
+
 
     public function edit(Session $session)
     {
@@ -65,5 +73,26 @@ class SessionController extends Controller
     public function destroy(Session $session) {
         $session->delete();
         return redirect()->route('admin_dashboard');
+    }
+
+    public function changeSession(Request $request) {
+        $current_session = Session::firstorNew([
+            'is_current' => true
+        ]);
+
+        $request->validate([
+            'session' => ['required', 'exists:sessions,id'],
+            'currentSession' => ['required', 'exists:sessions,id', Rule::in([$current_session->id])],
+        ]);
+
+        try {
+            DB::transaction(function () use ($request) {
+                Session::where('id', $request->currentSession)->update(["is_current" => false]);
+                Session::where('id', $request->session)->update(["is_current" => true]);
+                return redirect()->route('admin_dashboard');
+            });
+        } catch(Exception $ex) {
+            return back()->with('status', 'Could not add session, something went wrong');
+        }
     }
 }

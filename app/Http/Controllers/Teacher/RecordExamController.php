@@ -44,8 +44,8 @@ class RecordExamController extends Controller
         // $users = User::where('user_type', 'student')->student();
 
         $students = Student::where([
-            ['session_id', $session->id],
-            ['class_room_id', $classroom->id],
+            'session_id' => $session->id,
+            'class_room_id' => $classroom->id,
         ])->get();
 
         return view('teacher.recordexam')->with('subject', $subject)

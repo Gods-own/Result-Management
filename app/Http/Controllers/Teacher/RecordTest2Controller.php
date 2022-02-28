@@ -45,8 +45,8 @@ class RecordTest2Controller extends Controller
         // $users = User::where('user_type', 'student')->student();
 
         $students = Student::where([
-            ['session_id', $session->id],
-            ['class_room_id', $classroom->id],
+            'session_id' => $session->id,
+            'class_room_id' => $classroom->id,
         ])->get();
 
         return view('teacher.recordtest2')->with('subject', $subject)

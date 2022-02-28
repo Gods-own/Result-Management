@@ -30,6 +30,8 @@ class CreateResultsTable extends Migration
             $table->unsignedBiginteger('term_id');
             $table->foreign('term_id')->references('id')->on('terms');
             $table->timestamps();
+            $table->unsignedBiginteger('session_id');
+            $table->foreign('session_id')->references('id')->on('sessions');
         });
     }
 

@@ -15,6 +15,8 @@ class AddRemarkController extends Controller
 {
     public function show(User $student) {
 
+        $this->authorize('pricipal_remark', $student);
+
         $term = Term::firstorNew([
             'is_current' => true
         ]);

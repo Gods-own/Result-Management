@@ -16,7 +16,7 @@ class DashboardController extends Controller
         elseif (Auth::user()->user_type == 'staff') {
             return redirect()->route('teacher_dashboard');
         }
-        else {
+        elseif (Auth::user()->user_type == 'student') {
             return view('dashboards.studentDashboard');
         }
     }

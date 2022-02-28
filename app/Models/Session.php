@@ -14,9 +14,9 @@ class Session extends Model
         'session_end',
     ];
 
-    public function students() 
+    public function students()
     {
-        return $this->hasMany(Student::class);
+        return $this->hasMany(Student::class, 'session_id');
     }
 
     public function result()

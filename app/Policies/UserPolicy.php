@@ -3,6 +3,9 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\Student;
+use App\Models\Session;
+use App\Models\Classroom;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
@@ -52,7 +55,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return $user->user_type === 'principal';
     }
 
     /**
@@ -89,5 +92,30 @@ class UserPolicy
     public function forceDelete(User $user, User $model)
     {
         //
+    }
+
+    public function principal_remark(User $user, User $model)
+    {
+        return $user->user_type === 'principal';
+    }
+
+    public function teacher_remark(User $user, User $model)
+    {
+        $session = Session::firstorNew([
+            'is_current' => true
+        ]);
+
+        // $users = User::where('user_type', 'student')->student();
+
+        $student = Student::firstorNew([
+            'session_id' => $session->id,
+            'student_id' => $model->id,
+        ]);
+        $classroom_id = $student->class_room_id;
+        $class_room = Classroom::firstorNew([
+            'id' => $classroom_id,
+        ]);
+
+        return $user->id ===$class_room->user_id;
     }
 }
