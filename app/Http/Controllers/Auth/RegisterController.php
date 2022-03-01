@@ -27,7 +27,8 @@ class RegisterController extends Controller
     }
 
     public function index () {
-        return view('auth.register');
+        $active2 = true;
+        return view('auth.register')->with('active2', $active2);
     }
 
     public function store(Request $request) {

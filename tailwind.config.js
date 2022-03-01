@@ -6,9 +6,9 @@ module.exports = {
     ],
     theme: {
         extend: {
-            backgroundImage: {
-                'jar-pattern': "url('./public/Sprinkle.svg')",
-            }
+            backgroundImage: theme => ({
+                'jar-pattern': "url('/public/Sprinkle.svg')",
+            })
         },
     },
     plugins: [],

@@ -12,17 +12,18 @@ class LoginController extends Controller
 {
 
 
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-    public function index() 
+    public function index()
     {
-        return view('auth.login');
+        $active1 = true;
+        return view('auth.login')->with('active1', $active1);
     }
 
-    public function store(Request $request) 
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'email' => ['required', 'email'],
@@ -30,11 +31,11 @@ class LoginController extends Controller
 
         ]);
 
-        if (!auth()->attempt($request->only('email', 'password'))) 
+        if (!auth()->attempt($request->only('email', 'password')))
         {
             return back()->with('status', 'Invalid login details');
         }
-        
+
         if (Auth::user()->user_type == 'principal') {
             return redirect()->route('admin_dashboard');
         }
@@ -44,7 +45,7 @@ class LoginController extends Controller
         else {
             return view('dashboards.studentDashboard');
         }
-            
+
 
     }
 }

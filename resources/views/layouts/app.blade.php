@@ -14,12 +14,12 @@
             <img class="w-20 h-auto" src="{{ asset('logo-2.png') }}">
             <ul>
                 @guest
-                <li class="inline-block ml-3"><a href="{{ route('login') }}">Login</a></li>
-                <li class="inline-block ml-3"><a href="{{ route('register') }}">Register</a></li>
+                <li class="inline-block ml-3 {{ isset($active1) ? 'bg-yellow-400' : '' }} {{ isset($active1) ? 'text-white' : '' }} px-2 py-1 rounded-xl"><a href="{{ route('login') }}">Login</a></li>
+                <li class="inline-block ml-3 {{ isset($active2) ? 'bg-yellow-400' : '' }} {{ isset($active2) ? 'text-white' : '' }} px-2 py-1 rounded-xl"><a href="{{ route('register') }}">Register</a></li>
                 @endguest
                 @auth
-                <li class="inline ml-3"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="ml-3">
+                <li class="inline-block ml-3"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="inline-block ml-3">
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <button type="submit">Logout</button>
