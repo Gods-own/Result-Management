@@ -85,10 +85,10 @@ class RegisterController extends Controller
                 return redirect()->route('admin_dashboard');
             }
             elseif (Auth::user()->user_type == 'staff') {
-                return view('dashboards.teacherDashboard');
+                return redirect()->route('teacher_dashboard');
             }
-            else {
-                return view('dashboards.studentDashboard');
+            elseif (Auth::user()->user_type == 'student') {
+                return redirect()->route('student_dashboard');
             }
 
         } catch (Exception $ex) {

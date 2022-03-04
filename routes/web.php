@@ -70,7 +70,7 @@ Route::middleware(['auth', 'isadmin'])->group(function () {
     Route::get('/manage_term', [TermController::class, 'index'])->name('manage_session');
     Route::post('/change_term', [TermController::class, 'changeTerm'])->name('change_term');
 
-    Route::post('/pricipal_remark/{student}', [AddRemarkController::class, 'show'])->name('principal_remark');
+    Route::post('/principal_remark/{student}', [AddRemarkController::class, 'show'])->name('principal_remark');
     Route::post('/principal_remark', [AddRemarkController::class, 'store'])->name('store_principal_remark');
 
     Route::get('/teacher/{user}/edit', [TeacherController::class, 'edit'])->name('edit_teacherInfo');
@@ -138,6 +138,7 @@ Route::post('/convert_to_excel/{student}/{session}/{term}', [ViewResultControlle
 Route::get('/class_lists', [ViewClassesController::class, 'index'])->name('view_classes');
 Route::post('/class_lists/{classroom}', [ViewClassesController::class, 'show'])->name('view_classStudents');
 
+Route::get('/dashboard/student', [StudentDashboardController::class, 'index'])->name('student_dashboard');
 
 // Route::get('/dashboard/staff', [TeacherDashboardController::class, 'index'])->name('teacherDashboard');
 

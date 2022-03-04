@@ -7,7 +7,7 @@ module.exports = {
     theme: {
         extend: {
             backgroundImage: theme => ({
-                'jar-pattern': "url('/public/Sprinkle.svg')",
+                'jar-pattern': "url('/images/Sprinkle.svg')",
             })
         },
     },

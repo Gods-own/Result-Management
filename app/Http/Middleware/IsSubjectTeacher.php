@@ -23,7 +23,7 @@ class IsSubjectTeacher
 
         $subjects_taught = SubjectTaught::where('teacher_id',  $teacher->id)->get();
 
-        if($subjects_taught->contains('subject_id', $subject->id)) {
+        if($subjects_taught->contains('subject_id', $subject)) {
             return $next($request);
         }
 

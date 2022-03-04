@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="py-10 sm:px-0 px-3 bg-jar-pattern min-h-screen">
-        <div class="bg-white py-6 lg:w-2/4 md:w-3/4 sm:w-11/12 mx-auto border-solid border border-gray-600 rounded-xl">
+        <div class="bg-white py-6 lg:w-2/4 md:w-3/4 sm:w-11/12 mx-auto border-solid border border-gray-300 rounded-xl">
             <form class="w-11/12 mx-auto" action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="text-center text-2xl font-bold text-blue-600">

@@ -15,7 +15,7 @@ class AddRemarkController extends Controller
 {
     public function show(User $student) {
 
-        $this->authorize('pricipal_remark', $student);
+        $this->authorize('principal_remark', $student);
 
         $term = Term::firstorNew([
             'is_current' => true
@@ -41,14 +41,14 @@ class AddRemarkController extends Controller
                 $user = Auth::user();
                 $remark = new PrincipalRemark();
                 $remark->fill($request->all());
-    
+
                 $remark->student_id = $request->name;
                 $remark->term_id = $request->term;
                 $remark->session_id = $request->session;
                 $remark->user_id = $user->id;
-    
+
                 $remark->save();
-    
+
                 return redirect()->route('admin_dashboard');
             } catch(Exception $ex) {
                 return back()->with('status', 'Could not add subjects, something went wrong');
